@@ -11,6 +11,14 @@ class TocMachine(GraphMachine):
             **machine_configs
         )
 
+    def back_to_user(self,event):
+        if event.get("message"):
+            if event['message'].get('text'):
+                text = event['message']['text']
+                return text.lower() == 'back'
+        return False
+
+        
     def is_going_to_dogs(self, event):
         if event.get("message"):
             if event['message'].get('text'):
@@ -47,6 +55,14 @@ class TocMachine(GraphMachine):
         return False
 
 
+    def others_to_pic_others(self, event):
+        if event.get("message"):
+            if event['message'].get('text'):
+                text = event['message']['text']
+                return text.lower() == 'pictures'
+        return False
+
+
     def to_corgipic(self, event):
         if event.get('postback'):
             if event['postback'].get('payload'):
@@ -70,6 +86,29 @@ class TocMachine(GraphMachine):
                 return text.lower() == 'shibainupic'
             return False
 
+    def to_kittenpic(self, event):
+        if event.get('postback'):
+            if event['postback'].get('payload'):
+                text = event['postback']['payload']
+                return text.lower() == 'kittenpic'
+            return False
+
+
+    def to_catpic(self, event):
+        if event.get('postback'):
+            if event['postback'].get('payload'):
+                text = event['postback']['payload']
+                return text.lower() == 'catpic'
+            return False
+
+
+    def to_otherpic(self, event):
+        if event.get('postback'):
+            if event['postback'].get('payload'):
+                text = event['postback']['payload']
+                return text.lower() == 'otherpic'
+            return False
+
 
     def on_enter_dogs(self, event):
         print("I'm entering dogs")
@@ -87,6 +126,15 @@ class TocMachine(GraphMachine):
         sender_id = event['sender']['id']
         send_text_message(sender_id, "I'm entering cats")
         #self.go_back()
+
+
+    def on_enter_others(self, event):
+        print("I'm entering others")
+
+        sender_id = event['sender']['id']
+        send_text_message(sender_id, "I'm entering others")
+        #self.go_back()
+
 
     def on_exit_cats(self, event):
         print('Leaving cats')
@@ -126,6 +174,18 @@ class TocMachine(GraphMachine):
         responese = send_button_message(sender_id, "Which kind of cats?", buttons)
 
 
+    def on_enter_pic_others(self, event):
+        print("ENTERING PIC_OTHERS")
+        sender_id = event['sender']['id']
+        buttons = [{
+            'type':'postback',
+            'title':'SURPRISE',
+            'payload':'otherpic'
+        }]
+
+        responese = send_button_message(sender_id, "PUSH THIS!!!", buttons)
+
+
     def on_enter_corgipic(self, event):
         print("SEND CORGI PIC")
         sender_id = event['sender']['id']
@@ -144,11 +204,25 @@ class TocMachine(GraphMachine):
         print("SEND SHIBA INU PIC")
         sender_id = event['sender']['id']
 
-        #responese = send_image_url(sender_id, "https://upload.wikimedia.org/wikipedia/commons/5/58/Shiba_inu_taiki.jpg")
-        responese = send_img_message(sender_id, "https://www.catster.com/wp-content/uploads/2018/05/A-gray-cat-crying-looking-upset.jpg")
+        responese = send_img_message(sender_id, "https://upload.wikimedia.org/wikipedia/commons/5/58/Shiba_inu_taiki.jpg")
 
 
+    def on_enter_kittenpic(self, event):
+        print("SEND KITTEN PIC")
+        sender_id = event['sender']['id']
+
+        responese = send_img_message(sender_id, "https://i.ytimg.com/vi/bLltMkKxmYA/maxresdefault.jpg")
 
 
+    def on_enter_catpic(self, event):
+        print("SEND CAT PIC")
+        sender_id = event['sender']['id']
+
+        responese = send_img_message(sender_id, "https://mmbiz.qpic.cn/mmbiz_jpg/8TF87KCnib22dPhDbyO1q9WEgzZ6BiatsCUo9OkTvtKWLOpexSpWzSo8snW72tUvqOUvOGg1ycgUgtyI34y4XBDg/0?wx_fmt=jpeg") 
 
 
+    def on_enter_otherpic(self, event):
+        print("SEND OTHER PIC")
+        sender_id = event['sender']['id']
+
+        responese = send_img_message(sender_id, "https://d3pz1jifuab5zg.cloudfront.net/2016/08/16153058/hamster-health-center-2.jpg")

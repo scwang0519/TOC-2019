@@ -12,11 +12,13 @@ machine = TocMachine(
         'others',
         'pic_dogs',
         'pic_cats',
+        'pic_others',
         'corgipic',
         'huskypic',
         'shibainupic',
         'kittenpic',
-        'catpic'
+        'catpic',
+        'otherpic'
     ],
     transitions=[
         {
@@ -51,6 +53,12 @@ machine = TocMachine(
         },
         {
             'trigger': 'advance',
+            'source': 'others',
+            'dest': 'pic_others',
+            'conditions': 'others_to_pic_others'
+        },
+        {
+            'trigger': 'advance',
             'source': 'pic_dogs',
             'dest': 'corgipic',
             'conditions': 'to_corgipic'
@@ -78,6 +86,30 @@ machine = TocMachine(
             'source': 'pic_cats',
             'dest': 'catpic',
             'conditions': 'to_catpic'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'pic_others',
+            'dest': 'otherpic',
+            'conditions': 'to_otherpic'
+        },
+        {
+            'trigger': 'advance', # not go_back
+            'source': [
+                'dogs',
+                'cats',
+                'others',
+                'pic_dogs',
+                'pic_cats',
+                'corgipic',
+                'huskypic',
+                'shibainupic',
+                'kittenpic',
+                'catpic',
+                'otherpic'
+            ],
+            'dest': 'user',
+            'conditions': 'back_to_user'
         }
 
  
