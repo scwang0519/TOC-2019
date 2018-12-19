@@ -50,6 +50,7 @@ The initial state is set to `user`.
 Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
 
 * user
+
         * Input: "go to dogs"
                 * Reply: "I'm entering dogs"
 
@@ -60,12 +61,17 @@ Every time `user` state is triggered to `advance` to another state, it will `go_
                 * Reply: "I'm entering others"
 
 Then, you can input `pictures` to see some cute pictures.
+
 When you are in `dogs`, you can choose three kinds of dogs, `corgi`, `husky`, or `shiba inu` by facebook buttons.
+
 When you are in `cats`, you can choose two kinds of cats, `kitten` or `cat` by facebook buttons.
+
 When you are in `others`, you can choose the `surprise` button to see the surprise animal :D !
+
 
 When you are in any states but user, input `back` will go to `user`.
 
 ## Reference
 Class Theory of Computation 2018
+
 Introductions by TAs on moodle
