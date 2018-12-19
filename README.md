@@ -42,7 +42,7 @@ python3 app.py
 ```
 
 ## Finite State Machine
-Later to show the pic.
+![fsm](./fsm.png)
 
 ## Usage
 The initial state is set to `user`.
